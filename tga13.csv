@@ -1,0 +1,27 @@
+﻿EDV-Nr./Bezeichnung;Beschreibung;Preiseinheit;Preis
+Titel;Dienstleistungen;;
+Untertitel;Anmeldung Wärmepumpenzähler;;
+Beschreibung_fett;Leistungen:;;
+;- Erledigung aller notwendigen Anträge und Anmeldungen mit dem Energieversorger;;
+;;;
+;Anmeldung Wärmepumpenzähler;€/pauschal;149
+;;;
+Untertitel;Anmeldung Wärmepumpe;;
+Beschreibung_fett;Leistungen:;;
+;- Erledigung aller notwendigen Anträge und Anmeldungen mit dem Energieversorger;;
+;;;
+;Anmeldung Wärmepumpenzähler;€/pauschal;99
+;;;
+Untertitel;Anmeldung der PV-Anlage bis 29,99 kWp;;
+Beschreibung_fett;Leistungen:;;
+;- Erledigung aller notwendigen Anträge und Anmeldungen mit dem Energieversorger bis 29,99 kWp ;;
+Beschreibung_fett;In Leistungen nicht entahlten:;;
+;- Registrierung im Marktstammdatenregister ;;
+;;;
+;Anmeldung PV-Anlage bis 29,99 kWp;€/pauschal;350
+;;;
+Untertitel;Registrierung im Marktstammdatenregister ;;
+Beschreibung_fett;Leistungen:;;
+;- Registrierung der PV-Anlage und des Batteriespeichers im Marktstammdatenregister;;
+;;;
+;Registrierung im Marktstammdatenregister ;€/pauschal;149

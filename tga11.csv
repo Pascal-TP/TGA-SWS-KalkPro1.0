@@ -1,0 +1,66 @@
+﻿EDV-Nr./Bezeichnung;Beschreibung;Preiseinheit;Preis;Bild
+Titel;Extras;;;
+Untertitel;Externes APZ-Feld nachrüsten;;;
+Beschreibung_fett;Materialien:;;;
+;- Spannungsabgriff ;;;
+;- Netzwerkleitung;;;
+;- notwendiges Klein- und Verdrahtungsmaterial;;;
+Beschreibung_fett;Leistungen:;;;
+;- Montieren des APZ-Feldes;;;
+;- Errichtung eines geschlossenen Kabelweges zwischen APZ-Feld und Zählerschrank (NAR);;;
+Beschreibung_fett;Hinweis:;;;
+;Ein APZ-Feld im Zählerschrank ist laut aktuellen Vorschriften zwingend erforderlich und wird extern nicht immer zugelassen. Dies kann dazu führen, dass der komplette Zählerschrank erneuert werden muss, da sonst der Zähler nicht getauscht und die PV-Anlage vom Energieversorger nicht abgenommen wird. Sollte dieser Fall eintreten, sind wir gezwungen, den Zählerschrank nachträglich zu tauschen und in Rechnung zu stellen. ;;;
+;;;;
+;Externes APS-Feld;€/Stk.;339,84;33
+;;;;
+Untertitel;Überspannungsschutz nachrüsten;;;
+Beschreibung_fett;Materialien:;;;
+;- Kombiableiter Typ 1+2;;;
+;- notwendiges Klein- und Verdrahtungsmaterial;;;
+Beschreibung_fett;Leistungen:;;;
+;- Montieren des Kombiableiters auf Sammelschiene;;;
+;- Herstellen einer Verbindung zu vorhandener Potentialausgleichsschiene;;;
+;;;;
+;Überspannungsschutz;€/Stk.;372,02;34
+;;;;
+Untertitel;Tiefenerder inkl. Leitungsverlegung & Anschluss an vorhandene Potentialausgleichsschiene;;;
+Beschreibung_fett;Materialien:;;;
+;- Tiefenerder V4A;;;
+;- Schutzleiter;;;
+Beschreibung_fett;Leistungen:;;;
+;- Eintreiben des Tiefenerders;;;
+;- Montage der Anschlussklemme;;;
+;- Verlegen und Anklemmen des Schutzleiters von der Tiefenerderanschlussklemme bis zur vorhandenen Potentialausgleichsschiene;;;
+;;;;
+;Tiefenerder;€/Stk.;797,52;35
+;;;;
+Untertitel;Vorbereitung Wärmepumpenanschluss;;;
+Beschreibung_fett;Materialien:;;;
+;- 1x FI Typ B 40A/30mA;;;
+;- 2x 3polig B 16;;;
+;- 1x 1polig B 16;;;
+;- notwendiges Klein- und Verdrahtungsmaterial;;;
+Beschreibung_fett;Leistungen:;;;
+;- Bestückung und Verdrahtung des Zählerschranks mit FI-Schutzschalter Typ B und Leitungsschutzschalter;;;
+;;;;
+;Vorbereitung Wärmepumpenanschluss;€/Stk.;574,16;15
+;;;;
+Untertitel;Ansteuerung Wärmepumpe Smart Grid;;;
+Beschreibung_fett;Materialien:;;;
+;- Miniverteiler Aufputz;;;
+;- Schaltrelais mit Schließkontakt;;;
+;- Netzwerkleitung;;;
+;- ggf. Kabelkanal;;;
+;- notwendiges Klein- und Verdrahtungsmaterial;;;
+Beschreibung_fett;Leistungen:;;;
+;- Montieren des Miniverteilers;;;
+;- Bestückung und Verdrahtung des Schaltrelais;;;
+;- Programmierung des Wechselrichters auf gewünschte Werte;;;
+;- Herstellen einer Kabelverbindung von Wechselrichter zu Wärmepumpe;;;
+;- ggf. Ausbauen des Kabelwegs;;;
+Beschreibung_fett;In Leistung nicht enthalten:;;;
+;- Die Verdrahtung und Programmierung an der Wärmepumpe können wir nicht vornehmen, sodass der zuständige Heizungsbauer vorzugsweise am selben Tag vor Ort sein sollte.;;;
+Beschreibung_fett;Hinweis:;;;
+;Die Verdrahtung und Programmierung an der Wärmepumpe können wir nicht vornehmen, sodass der zuständige Heizungsbauer vorzugsweise am selben Tag vor Ort sein sollte. ;;;
+;;;;
+;Smart Grid;€/Stk.;283,16;16
