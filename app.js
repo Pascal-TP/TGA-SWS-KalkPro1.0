@@ -286,46 +286,62 @@ function applyWrRecommendation(pageId) {
   const modules = getPvModuleCount();
   const reco = getWrRecommendationText(modules);
 
-  // Box anlegen/finden
   let box = pageEl.querySelector(".wr-reco-box");
   if (!box) {
     box = document.createElement("div");
     box.className = "wr-reco-box";
-    // direkt unter die H2 setzen
     const h2 = pageEl.querySelector("h2");
     if (h2 && h2.parentNode) h2.parentNode.insertBefore(box, h2.nextSibling);
   }
 
-  // Wenn keine Module gewählt: nichts machen
+  // Hilfsfunktion: prüft, ob irgendwo eine unpassende Position mit Menge > 0 eingetragen ist
+  function updateWrMismatchState() {
+    let hasMismatch = false;
+
+    const inputs = pageEl.querySelectorAll("input.menge-input");
+    inputs.forEach(inp => {
+      const row = inp.closest(".row");
+      if (!row) return;
+
+      const size = extractWrSizeFromRow(row);
+      const val = parseFloat(String(inp.value).replace(",", ".")) || 0;
+      const shouldDim = !!(size && size !== reco);
+
+      if (shouldDim && val > 0) {
+        hasMismatch = true;
+      }
+    });
+
+    if (hasMismatch) localStorage.setItem("wrMismatch", "1");
+    else localStorage.removeItem("wrMismatch");
+  }
+
+  // Wenn keine Module gewählt: alles zurücksetzen
   if (!reco) {
     box.style.display = "none";
     pageEl.querySelectorAll(".wr-dimmed").forEach(r => r.classList.remove("wr-dimmed"));
     pageEl.querySelectorAll(".wr-warn").forEach(w => w.remove());
+    localStorage.removeItem("wrMismatch");
+    localStorage.removeItem("wrRecoSize");
+    localStorage.removeItem("wrRecoModules");
     return;
   }
 
   box.style.display = "block";
   box.innerHTML = `Empfehlung anhand der PV-Module (${modules} Stück): <strong>Wechselrichter ${reco}</strong>`;
 
-  // Alle Positions-Zeilen (mit Eingabefeld) durchgehen
   const inputs = pageEl.querySelectorAll("input.menge-input");
-  let hasMismatch = false;
   inputs.forEach(inp => {
     const row = inp.closest(".row");
     if (!row) return;
 
-    // Warntext entfernen (wird ggf. neu gesetzt)
     const existingWarn = row.querySelector(".wr-warn");
     if (existingWarn) existingWarn.remove();
 
     const size = extractWrSizeFromRow(row);
-
-    // Nur ausgrauen, wenn wir eine WR-Größe überhaupt erkennen konnten
-    const shouldDim = (size && size !== reco);
-    hasMismatch = true;
+    const shouldDim = !!(size && size !== reco);
     row.classList.toggle("wr-dimmed", shouldDim);
 
-    // falls schon Wert > 0 eingetragen und dimmed -> Hinweis anzeigen
     const val = parseFloat(String(inp.value).replace(",", ".")) || 0;
     if (shouldDim && val > 0) {
       const warn = document.createElement("div");
@@ -333,16 +349,12 @@ function applyWrRecommendation(pageId) {
       warn.innerText = "Achtung: Wechselrichter nicht passend!";
       row.appendChild(warn);
     }
-    // Ergebnis für Seite 40 merken
-    if (hasMismatch) localStorage.setItem("wrMismatch", "1");
-    else localStorage.removeItem("wrMismatch");
-
-    // Optional: für Anzeige auf Seite 40 (empfohlen)
-    localStorage.setItem("wrRecoSize", reco);
-    localStorage.setItem("wrRecoModules", String(modules));
   });
 
-  // Einmaliger Event-Listener je Seite: bei Eingabe Warnung setzen/entfernen
+  localStorage.setItem("wrRecoSize", reco);
+  localStorage.setItem("wrRecoModules", String(modules));
+  updateWrMismatchState();
+
   if (!pageEl.dataset.wrRecoListener) {
     pageEl.addEventListener("input", (e) => {
       const inp = e.target;
@@ -351,11 +363,10 @@ function applyWrRecommendation(pageId) {
       const row = inp.closest(".row");
       if (!row) return;
 
-      const val = parseFloat(String(inp.value).replace(",", ".")) || 0;
-
-      // alten Warntext entfernen
       const old = row.querySelector(".wr-warn");
       if (old) old.remove();
+
+      const val = parseFloat(String(inp.value).replace(",", ".")) || 0;
 
       if (row.classList.contains("wr-dimmed") && val > 0) {
         const warn = document.createElement("div");
@@ -363,6 +374,8 @@ function applyWrRecommendation(pageId) {
         warn.innerText = "Achtung: Wechselrichter nicht passend!";
         row.appendChild(warn);
       }
+
+      updateWrMismatchState();
     }, true);
 
     pageEl.dataset.wrRecoListener = "1";
