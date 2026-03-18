@@ -3702,21 +3702,21 @@ function loadPage25() {
         if (!isNaN(preis)) {
 
 
-          if (!headerInserted) {
-            html += `
-          <div class="row table-header">
-            <div class="header-img-cell">
-        <img src="xxx.jpg" class="header-img" alt="Bild">
-        </div>
-            <div>Beschreibung</div>
-            <div>Einheit</div>
-            <div style="text-align:center;">Menge</div>
-            <div style="text-align:right;">Preis / Einheit</div>
-            <div style="text-align:right;">Positionsergebnis</div>
-          </div>
-        `;
-            headerInserted = true;
-          }
+ //         if (!headerInserted) {
+ //           html += `
+ //         <div class="row table-header">
+ //           <div class="header-img-cell">
+ //       <img src="xxx.jpg" class="header-img" alt="Bild">
+ //       </div>
+ //           <div>Beschreibung</div>
+ //           <div>Einheit</div>
+ //           <div style="text-align:center;">Menge</div>
+ //           <div style="text-align:right;">Preis / Einheit</div>
+ //           <div style="text-align:right;">Positionsergebnis</div>
+ //         </div>
+ //       `;
+ //           headerInserted = true;
+ //         }
 
           const menge = gespeicherteWerte[index] || 0;
 
@@ -3747,9 +3747,9 @@ function loadPage25() {
       });
 
       html += `<div id="gesamtSumme25" class="gesamt">Gesamtsumme: 0,00 €</div>`;
-      html += `<div id="gesamtSumme25Rabatt" class="gesamt rabatt" data-rabatt="angebot">
-          Gesamtsumme abzgl. SHK-Rabatt (15%): 0,00 €
-         </div>`;
+//      html += `<div id="gesamtSumme25Rabatt" class="gesamt rabatt" data-rabatt="angebot">
+//          Gesamtsumme abzgl. SHK-Rabatt (15%): 0,00 €
+//         </div>`;
 
       container.innerHTML = html;
       berechneGesamt25();
