@@ -657,10 +657,7 @@ async function registerRequest() {
   }
 }
 
-
 window.registerRequest = registerRequest;
-
-
 
 // -----------------------------
 // TableHeaderWithImage - Bild neben Spaltenüberschriften einfügen
@@ -736,7 +733,7 @@ async function showPage(id, fromHistory = false) {
   if (id === "page-23") loadPage23();
   if (id === "page-24") loadPage24();
   if (id === "page-25") loadPage25();
-  if (id === "page-26") loadPage27();
+  if (id === "page-26") loadPage26();
   //if (id === "page-28") loadPage28();
   //if (id === "page-30") loadPage30();
   //if (id === "page-31") loadPage31();
@@ -1640,7 +1637,7 @@ async function loadPage40() {
     { key: "page23Data", csv: "tga1.csv" },
     { key: "page24Data", csv: "tga2.csv" },
     { key: "page25Data", csv: "tga13.csv" },
-    { key: "page26Data", csv: "xxx.csv" }
+    { key: "page26Data", csv: "tga15.csv" }
     //       { key: "page28Data", csv: "xxx.csv" },
     //       { key: "page30Data", csv: "xxx.csv" },
     //       { key: "page31Data", csv: "xxx.csv" },
