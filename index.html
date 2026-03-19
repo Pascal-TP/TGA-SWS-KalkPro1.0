@@ -43,7 +43,8 @@
                 <optgroup label="AC">
                     <option value="nav:page-11">Wechselrichter</option>
                     <option value="nav:page-21">Zubehör Wechselrichter</option>
-                    <option value="nav:page-10">Speicher</option>
+                    <option value="nav:page-10">Speicher BYD</option>
+                    <option value="nav:page-26">Speicher Fronius</option>
                     <option value="nav:page-24">Wallbox</option>
                     <option value="nav:page-20">Zählerschränke</option>
                     <option value="nav:page-22">Extras Zählerschränke</option>
@@ -598,7 +599,7 @@
         <!-- Auswahlbuttons untereinander -->
         <div>
             <button onclick="showPage('page-11')">Wechselrichter</button><br>
-            <button onclick="showPage('page-10')">Speicher</button><br>
+            <button onclick="showPage('page-10-1')">Speicher</button><br>
             <button onclick="showPage('page-18')">Wallbox</button><br>
             <button onclick="showPage('page-20')">Zählerschrank</button><br>
         </div>
@@ -863,7 +864,7 @@
         </div>
     </div>
 
-    <!-- SEITE 10: Speicher -->
+    <!-- SEITE 10: Speicher BYD-->
     <div class="page" id="page-10">
         <h2>Speicher</h2>
 
@@ -875,6 +876,32 @@
             <button id="btnWeiter10Komplett" class="btn-komplett hidden" onclick="showPage('page-18')">Weiter</button>
 
         </div>
+    </div>
+
+<!-- SEITE 26:  Speicher Fronius-->
+    <div class="page" id="page-26">
+        <h2>Speicher Fronius</h2>
+
+        <div id="content-26" class="price-table"></div>
+
+        <div class="button-bar">
+            <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
+            <button id="btnWeiter26Normal" onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
+            <button id="btnWeiter26Komplett" class="btn-komplett hidden" onclick="showPage('page-18')">Weiter</button>
+        </div>
+    </div>
+
+<!-- SEITE 10.1: MENÜ Speicher -->
+    <div class="page" id="page-10-1">
+        <h2>Menü Speicher</h2>
+
+        <div>
+            <button onclick="showPage('page-26')">Typ "Fronius"</button>
+            <button onclick="showPage('page-10')">Typ "BYD"</button>            
+        </div>
+
+        <br>
+        <br>
     </div>
 
     <!-- SEITE 11: MENÜ Wechselrichter -->
@@ -934,18 +961,7 @@
             <button id="btnWeiter25Komplett" class="btn-komplett hidden" onclick="direktZumAngebot()">Weiter</button>
         </div>
     </div>
-
-    <!-- SEITE 26:  -->
-    <div class="page" id="page-26">
-        <h2> </h2>
-
-        <button onclick="showPage('page-27')">Handelsmarke</button>
-        <button onclick="showPage('page-28')">Uponor</button>
-        <br><br>
-
-        <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
-    </div>
-
+    
     <!-- SEITE 29:  -->
     <div class="page" id="page-29">
         <h2> </h2>
