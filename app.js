@@ -529,7 +529,7 @@ const ADMIN_EMAILS = [
   "julian.kniep@tga-nord.de"
 ];
 
-  function isAdminUser() {
+function isAdminUser() {
   const email = (auth.currentUser?.email || "").toLowerCase();
   return ADMIN_EMAILS.includes(email);
 }
@@ -933,10 +933,10 @@ async function savePassword() {
 async function exportLoginLog() {
   const isAdmin = isAdminUser();
 
-if (!isAdmin) {
-  alert("Keine Berechtigung.");
-return;
-}
+  if (!isAdmin) {
+    alert("Keine Berechtigung.");
+    return;
+  }
 
   const { getDocs, query, orderBy } = await import(
     "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js"
@@ -974,10 +974,10 @@ window.exportLoginLog = exportLoginLog;
 async function loadPendingUsers() {
   const isAdmin = isAdminUser();
 
-if (!isAdmin) {
-  alert("Keine Berechtigung.");
-return;
-}
+  if (!isAdmin) {
+    alert("Keine Berechtigung.");
+    return;
+  }
 
   const q = query(collection(db, "users"), where("approved", "==", false));
   const snap = await getDocs(q);
@@ -990,10 +990,10 @@ return;
 async function approveUser(uid, email) {
   const isAdmin = isAdminUser();
 
-if (!isAdmin) {
-  alert("Keine Berechtigung.");
-return;
-}
+  if (!isAdmin) {
+    alert("Keine Berechtigung.");
+    return;
+  }
 
   // ✅ udoc holen
   const uref = doc(db, "users", uid);
@@ -1045,11 +1045,11 @@ async function loadAdminPage() {
   const box = document.getElementById("admin-registrations");
   if (!box) return;
 
-const isAdmin = isAdminUser();
+  const isAdmin = isAdminUser();
 
   if (!isAdmin) {
     alert("Keine Berechtigung.");
-return;
+    return;
   }
 
   box.innerHTML = "<div>Lade…</div>";
@@ -3721,21 +3721,21 @@ function loadPage25() {
         if (!isNaN(preis)) {
 
 
- //         if (!headerInserted) {
- //           html += `
- //         <div class="row table-header">
- //           <div class="header-img-cell">
- //       <img src="xxx.jpg" class="header-img" alt="Bild">
- //       </div>
- //           <div>Beschreibung</div>
- //           <div>Einheit</div>
- //           <div style="text-align:center;">Menge</div>
- //           <div style="text-align:right;">Preis / Einheit</div>
- //           <div style="text-align:right;">Positionsergebnis</div>
- //         </div>
- //       `;
- //           headerInserted = true;
- //         }
+          //         if (!headerInserted) {
+          //           html += `
+          //         <div class="row table-header">
+          //           <div class="header-img-cell">
+          //       <img src="xxx.jpg" class="header-img" alt="Bild">
+          //       </div>
+          //           <div>Beschreibung</div>
+          //           <div>Einheit</div>
+          //           <div style="text-align:center;">Menge</div>
+          //           <div style="text-align:right;">Preis / Einheit</div>
+          //           <div style="text-align:right;">Positionsergebnis</div>
+          //         </div>
+          //       `;
+          //           headerInserted = true;
+          //         }
 
           const menge = gespeicherteWerte[index] || 0;
 
@@ -3766,9 +3766,9 @@ function loadPage25() {
       });
 
       html += `<div id="gesamtSumme25" class="gesamt">Gesamtsumme: 0,00 €</div>`;
-//      html += `<div id="gesamtSumme25Rabatt" class="gesamt rabatt" data-rabatt="angebot">
-//          Gesamtsumme abzgl. SHK-Rabatt (15%): 0,00 €
-//         </div>`;
+      //      html += `<div id="gesamtSumme25Rabatt" class="gesamt rabatt" data-rabatt="angebot">
+      //          Gesamtsumme abzgl. SHK-Rabatt (15%): 0,00 €
+      //         </div>`;
 
       container.innerHTML = html;
       berechneGesamt25();
@@ -3950,9 +3950,9 @@ function loadPage26() {
       });
 
       html += `<div id="gesamtSumme26" class="gesamt">Gesamtsumme: 0,00 €</div>`;
-      html += `<div id="gesamtSumme26Rabatt" class="gesamt rabatt" data-rabatt="angebot">
-        Gesamtsumme abzgl. SHK-Rabatt (15%): 0,00 €
-      </div>`;
+      //     html += `<div id="gesamtSumme26Rabatt" class="gesamt rabatt" data-rabatt="angebot">
+      //      Gesamtsumme abzgl. SHK-Rabatt (15%): 0,00 €
+      //   </div>`;
 
       container.innerHTML = html;
       berechneGesamt26();
