@@ -492,6 +492,8 @@ const auth = getAuth(fbApp);
     const info = document.getElementById("login-info");
 
     if (user) {
+       document.body.classList.add("is-logged-in");
+      startTimer();
       // UI
       actions?.classList.remove("hidden");
       if (info) info.innerText = "Angemeldet als: " + user.email;
@@ -505,6 +507,9 @@ const auth = getAuth(fbApp);
     } else {
       // UI
       actions?.classList.add("hidden");
+          clearInterval(logoutTimer);
+    sessionStorage.removeItem(LOGOUT_DEADLINE_KEY);
+    document.body.classList.remove("is-logged-in");
       if (info) info.innerText = "";
       updateAdminUI_();
 
@@ -1097,19 +1102,72 @@ window.loadAdminPage = loadAdminPage;
 //  LOGOUT-TIMER
 // -----------------------------
 
-function startTimer() {
-  remaining = 600;
+const LOGOUT_AFTER_MS = 10 * 60 * 1000;
+const LOGOUT_DEADLINE_KEY = "kpLogoutDeadline";
+
+function setLogoutDeadline() {
+  sessionStorage.setItem(LOGOUT_DEADLINE_KEY, String(Date.now() + LOGOUT_AFTER_MS));
+}
+
+function getLogoutDeadline() {
+  return Number(sessionStorage.getItem(LOGOUT_DEADLINE_KEY) || 0);
+}
+
+async function autoLogoutNow() {
   clearInterval(logoutTimer);
-  logoutTimer = setInterval(() => {
-    remaining--;
-    let m = Math.floor(remaining / 60);
-    let s = remaining % 60;
-    timer.innerText = `Logout in: ${m}:${s.toString().padStart(2, "0")}`;
-    if (remaining <= 0) {
-      alert("Automatisch ausgeloggt.");
-      location.reload();
-    }
-  }, 1000);
+  sessionStorage.removeItem(LOGOUT_DEADLINE_KEY);
+
+  try {
+    await signOut(auth);
+  } catch (e) {
+    console.error("Auto-Logout Fehler:", e);
+  }
+
+  currentUser = null;
+  remaining = 600;
+
+  const t = document.getElementById("timer");
+  if (t) t.innerText = "Logout in: 10:00";
+
+  const info = document.getElementById("login-info");
+  if (info) info.innerText = "";
+
+  showPage("page-login");
+  const loginError = document.getElementById("loginError");
+  if (loginError) loginError.innerText = "Automatisch ausgeloggt wegen Inaktivität.";
+}
+
+function checkLogoutTimer() {
+  const deadline = getLogoutDeadline();
+
+  if (!deadline) return;
+
+  const isUserKnown = !!auth.currentUser || !!currentUser;
+  if (!isUserKnown) return;
+
+  const diff = deadline - Date.now();
+
+  if (diff <= 0) {
+    autoLogoutNow();
+    return;
+  }
+
+  const seconds = Math.ceil(diff / 1000);
+  remaining = seconds;
+
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+
+  const t = document.getElementById("timer");
+  if (t) t.innerText = `Logout in: ${m}:${s.toString().padStart(2, "0")}`;
+}
+
+function startTimer() {
+  clearInterval(logoutTimer);
+  setLogoutDeadline();
+  checkLogoutTimer();
+
+  logoutTimer = setInterval(checkLogoutTimer, 1000);
 }
 
 // -----------------------------
@@ -4513,8 +4571,21 @@ function getInitialPage() {
 
 // -----------------------------
 
-document.body.addEventListener("mousemove", () => remaining = 600);
-document.body.addEventListener("keydown", () => remaining = 600);
+function resetLogoutTimerByActivity() {
+  if (!auth.currentUser) return;
+  setLogoutDeadline();
+  checkLogoutTimer();
+}
+
+["mousemove", "keydown", "click", "input", "scroll", "touchstart"].forEach(evt => {
+  document.addEventListener(evt, resetLogoutTimerByActivity, { passive: true });
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) checkLogoutTimer();
+});
+
+window.addEventListener("focus", checkLogoutTimer);
 
 // -----------------------------
 // Funktionen für HTML global verfügbar machen
