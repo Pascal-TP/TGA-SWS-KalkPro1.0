@@ -4572,7 +4572,9 @@ function getInitialPage() {
 // -----------------------------
 
 function resetLogoutTimerByActivity() {
-  if (!auth.currentUser) return;
+  const isUserKnown = !!auth.currentUser || !!currentUser;
+  if (!isUserKnown) return;
+
   setLogoutDeadline();
   checkLogoutTimer();
 }
