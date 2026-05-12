@@ -1987,7 +1987,7 @@ function clearInputs() {
   if (sum25) sum25.innerText = "Gesamtsumme Angebot: 0,00 €";
 
   const sum26 = document.getElementById("gesamtSumme26");
-  if (sum27) sum27.innerText = "Gesamtsumme Angebot: 0,00 €";
+  if (sum26) sum26.innerText = "Gesamtsumme Angebot: 0,00 €";
 
   // const sum28 = document.getElementById("gesamtSumme28");
   // if (sum28) sum28.innerText = "Gesamtsumme Angebot: 0,00 €";
