@@ -422,8 +422,11 @@ function resetStoredInputsOnReload() {
     "page23Data",
     "page24Data",
     "page25Data",
-    "page26Data"
+    "page26Data",
+    "uploadedFiles"
   ];
+
+  void clearUploadedFilesFromStorage();
 
   keysToRemove.forEach(k => localStorage.removeItem(k));
 }
@@ -604,6 +607,7 @@ function updateAuthButtons() {
 document.addEventListener("DOMContentLoaded", () => {
   const cb1 = document.getElementById("chkPrivacyAck");
   const cb2 = document.getElementById("chkPrivacyAck2");
+  const fileInput = document.getElementById("request-files");
 
   cb1?.addEventListener("change", updateAuthButtons);
   cb2?.addEventListener("change", updateAuthButtons);
@@ -612,7 +616,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (cb1) cb1.checked = false;
   if (cb2) cb2.checked = false;
 
+  if (fileInput) {
+    fileInput.addEventListener("change", handleFileUpload);
+  }
+
   updateAuthButtons();
+  renderFileList();
 });
 
 // -----------------------------
@@ -1319,6 +1328,138 @@ function savePage5Data() {
 
   localStorage.setItem("page5Data", JSON.stringify(obj));
 }
+
+function getRequesterEmail() {
+  return (document.getElementById("shk-email")?.value || "").trim().toLowerCase();
+}
+
+function getRequesterKey() {
+  const mail = getRequesterEmail();
+  return (mail || "unknown").replace(/[^a-z0-9._-]/g, "_");
+}
+
+async function handleFileUpload(event) {
+  const files = Array.from(event.target.files);
+
+  const progressContainer = document.getElementById("upload-progress-container");
+  const progressBar = document.getElementById("upload-progress-bar");
+  const progressText = document.getElementById("upload-progress-text");
+
+  const currentTotal = getUploadedFilesTotalSize();
+  const newFilesTotal = files.reduce((sum, file) => sum + file.size, 0);
+  const maxTotalSize = 10 * 1024 * 1024;
+
+  if (currentTotal + newFilesTotal > maxTotalSize) {
+    showHinweis("Die maximale Gesamtgröße aller hochgeladenen Dateien beträgt 10 MB.");
+    event.target.value = "";
+    return;
+  }
+
+  for (const file of files) {
+    try {
+      const requesterKey = getRequesterKey();
+      const path = `requests/${requesterKey}/attachments/${Date.now()}_${file.name}`;
+      const fileRef = storageRef(blazeStorage, path);
+      const uploadTask = uploadBytesResumable(fileRef, file);
+
+      progressContainer.style.display = "block";
+
+      await new Promise((resolve, reject) => {
+        uploadTask.on(
+          "state_changed",
+          snapshot => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            progressBar.style.width = progress + "%";
+            progressText.innerText = Math.round(progress) + " %";
+          },
+          reject,
+          () => {
+            progressBar.style.width = "100%";
+            progressText.innerText = "Upload abgeschlossen";
+            resolve();
+          }
+        );
+      });
+
+      uploadedFiles.push({
+        name: file.name,
+        path,
+        size: file.size
+      });
+
+    } catch (err) {
+      console.error("Upload Fehler:", err);
+      showHinweis("Fehler beim Hochladen: " + file.name);
+    }
+  }
+
+  localStorage.setItem("uploadedFiles", JSON.stringify(uploadedFiles));
+  renderFileList();
+  event.target.value = "";
+
+  setTimeout(() => {
+    progressBar.style.width = "0%";
+    progressText.innerText = "0%";
+    progressContainer.style.display = "none";
+  }, 1000);
+}
+
+function getUploadedFilesTotalSize() {
+  return uploadedFiles.reduce((sum, file) => sum + (file.size || 0), 0);
+}
+
+function renderFileList() {
+  const container = document.getElementById("file-list");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  uploadedFiles.forEach((file, index) => {
+    const div = document.createElement("div");
+    div.className = "file-item";
+    div.innerHTML = `
+      <span class="file-name">${file.name}</span>
+      <button type="button" onclick="removeFile(${index})">Entfernen</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+async function removeFile(index) {
+  const file = uploadedFiles[index];
+
+  try {
+    const fileRef = storageRef(blazeStorage, file.path);
+    await deleteObject(fileRef);
+  } catch (err) {
+    console.warn("Datei konnte nicht gelöscht werden:", err);
+  }
+
+  uploadedFiles.splice(index, 1);
+  localStorage.setItem("uploadedFiles", JSON.stringify(uploadedFiles));
+  renderFileList();
+}
+
+async function clearUploadedFilesFromStorage() {
+  const files = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
+
+  for (const file of files) {
+    if (!file.path) continue;
+
+    try {
+      const fileRef = storageRef(blazeStorage, file.path);
+      await deleteObject(fileRef);
+    } catch (err) {
+      console.warn("Temporäre Datei konnte nicht gelöscht werden:", err);
+    }
+  }
+
+  uploadedFiles = [];
+  localStorage.removeItem("uploadedFiles");
+}
+
+window.handleFileUpload = handleFileUpload;
+window.removeFile = removeFile;
 
 // -----------------------------
 // SEITE 14 – Wechselrichter "strang" (tga4.csv)

@@ -643,20 +643,23 @@
 
                 <div class="error" id="page5-error" style="color:darkred; margin:10px;"></div>
 
-                <div class="upload-box">
-                    <h3>Zusätzliche Dateien hochladen</h3>
+                <div class="form-group upload-box">
+                    <label for="request-files">Dateien hochladen (max. 10 MB gesamt):</label><br>
+                    <button type="button" onclick="document.getElementById('request-files').click()">
+                        Dateien auswählen
+                    </button>
+                    <input type="file" id="request-files" multiple style="display:none;">
+                    <div id="file-list" class="file-list"></div>
+                </div>
 
-                    <p class="upload-hinweis">
-                        Hier können zusätzliche Unterlagen wie Bilder, Belegungspläne oder Dokumente hochgeladen werden.
-                    </p>
-
-                    <input type="file" id="request-files" multiple>
-
-                    <div id="upload-progress-wrapper" class="hidden">
-                        <div id="upload-progress-bar"></div>
+                <div id="upload-progress-container" style="display:none; margin:15px auto; max-width:250px;">
+                    <div style="background:#eee; border-radius:6px; overflow:hidden;">
+                        <div id="upload-progress-bar"
+                            style="width:0%; height:20px; background:#4caf50; transition:width 0.2s;"></div>
                     </div>
-
-                    <div id="uploaded-files-list"></div>
+                    <div id="upload-progress-text" style="margin-top:5px; font-size:14px;">
+                        0%
+                    </div>
                 </div>
 
                 <div class="button-bar">
