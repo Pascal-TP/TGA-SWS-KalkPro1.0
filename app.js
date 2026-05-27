@@ -756,6 +756,85 @@ function renderTableHeaderWithImage(imgSrc = "bild3.jpg") {
   `;
 }
 
+function updateKpNavigation(pageId) {
+  document.querySelectorAll(".kp-nav-item").forEach(btn => {
+    btn.classList.remove("active", "parent-active");
+
+    const target = btn.dataset.page;
+    if (target === pageId) {
+      btn.classList.add("active");
+    }
+  });
+
+  const dcPages = new Set(["page-6", "page-24", "page-23", "page-8", "page-9"]);
+  const acPages = new Set(["page-7", "page-11", "page-14", "page-14-2", "page-21", "page-10", "page-26", "page-18", "page-20", "page-22"]);
+
+  document.querySelectorAll(".kp-subnav").forEach(group => {
+    group.classList.remove("open");
+  });
+
+  if (dcPages.has(pageId)) {
+    document.querySelector('.kp-subnav[data-parent="dc"]')?.classList.add("open");
+
+    if (pageId !== "page-6") {
+      document.querySelector('.kp-nav-item[data-page="page-6"]')?.classList.add("parent-active");
+    }
+  }
+
+  if (acPages.has(pageId)) {
+    document.querySelector('.kp-subnav[data-parent="ac"]')?.classList.add("open");
+
+    if (pageId !== "page-7") {
+      document.querySelector('.kp-nav-item[data-page="page-7"]')?.classList.add("parent-active");
+    }
+  }
+}
+
+const kpSummaryConfig = [
+  { key: "page24Data", label: "Flachdach" },
+  { key: "page23Data", label: "Schrägdach" },
+  { key: "page8Data", label: "Optimierer" },
+  { key: "page9Data", label: "Gerüst" },
+  { key: "page142Data", label: "Wechselrichter" },
+  { key: "page21Data", label: "Zubehör WR" },
+  { key: "page10Data", label: "Speicher BYD" },
+  { key: "page26Data", label: "Speicher Fronius" },
+  { key: "page18Data", label: "Wallbox" },
+  { key: "page20Data", label: "Zählerschränke" },
+  { key: "page22Data", label: "Extras Zählerschrank" },
+  { key: "page25Data", label: "Dienstleistung" }
+];
+
+function getKpTotalQty(storageKey) {
+  const data = JSON.parse(localStorage.getItem(storageKey) || "{}");
+
+  return Object.values(data).reduce((sum, value) => {
+    const n = parseFloat(String(value).replace(",", ".")) || 0;
+    return sum + n;
+  }, 0);
+}
+
+function updateKpSelectionSummary() {
+  const box = document.getElementById("kp-selection-summary");
+  if (!box) return;
+
+  let html = "";
+
+  kpSummaryConfig.forEach(item => {
+    const qty = getKpTotalQty(item.key);
+
+    if (qty > 0) {
+      html += `
+        <div class="kp-summary-item">
+          <span>${item.label}</span>
+          <strong>${qty.toLocaleString("de-DE")} Stück</strong>
+        </div>
+      `;
+    }
+  });
+
+  box.innerHTML = html || `<p class="kp-empty-summary">Noch keine Auswahl vorhanden.</p>`;
+}
 
 // -----------------------------
 // showPage
@@ -838,6 +917,8 @@ async function showPage(id, fromHistory = false) {
   if (cb2) cb2.checked = false;
 
   updateAuthButtons();
+  updateKpNavigation(id);
+  updateKpSelectionSummary();
 }
 
 // -----------------------------
