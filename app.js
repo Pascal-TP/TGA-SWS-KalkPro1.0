@@ -4936,7 +4936,7 @@ async function sendRequestPdfByEmail() {
   const requesterEmail = (page5Data["copy-email"] || "").trim().toLowerCase();
 
   if (!requesterEmail) {
-    showHinweis("Bitte geben Sie auf Seite 5 eine SHK-E-Mail-Adresse an.");
+    showHinweis("Bitte geben Sie auf Seite 5 eine E-Mail-Adresse für die Kopie an.");
     return;
   }
 
@@ -4966,7 +4966,7 @@ async function sendRequestPdfByEmail() {
       angebotTyp,
       shkName: "",
       shkContact: page5Data["shk-contact"] || "",
-      shkEmail: requesterEmail,
+      shkEmail: page5Data["shk-email"] || "",
       siteAddress: [
         page5Data["bv-contact"] || "",
         page5Data["bv-strasse"] || "",
