@@ -162,6 +162,10 @@
                     </label>
                 </div>
 
+                <div class="recaptcha-wrap">
+                    <div class="g-recaptcha" data-sitekey="HIER_DEIN_SWS_SITEKEY"></div>
+                </div>
+
                 <button id="btnRegisterSend" onclick="registerRequest()">Registrierung absenden</button>
                 <button type="button" onclick="showPage('page-login')">Zurück zum Login</button>
                 <br>
@@ -638,6 +642,22 @@
                 </div>
 
                 <div class="error" id="page5-error" style="color:darkred; margin:10px;"></div>
+
+                <div class="upload-box">
+                    <h3>Zusätzliche Dateien hochladen</h3>
+
+                    <p class="upload-hinweis">
+                        Hier können zusätzliche Unterlagen wie Bilder, Belegungspläne oder Dokumente hochgeladen werden.
+                    </p>
+
+                    <input type="file" id="request-files" multiple>
+
+                    <div id="upload-progress-wrapper" class="hidden">
+                        <div id="upload-progress-bar"></div>
+                    </div>
+
+                    <div id="uploaded-files-list"></div>
+                </div>
 
                 <div class="button-bar">
                     <button onclick="submitPage5()">Eingabe und Weiter</button>
