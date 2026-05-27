@@ -470,17 +470,22 @@
             <div class="page" id="page-3">
                 <h2>Bitte auswählen</h2>
 
-                <button onclick="showPage('page-4')">KV</button>
-                <button onclick="showPage('page-5')">Anfrage an TGA</button><br>
-                <button onclick="showPage('page-3-1')">Info: Der Weg zur Photovoltaikanlage</button>
+                <div class="kalk-card-row">
+                    <div class="kalk-card" onclick="showPage('page-4')">
+                        <strong>KV</strong>
+                        <span>Schnelle und direkte Ermittlung eines Richtpreises für den Kunden.</span>
+                    </div>
 
-                <p class="hint">
-                    KV = Kostenvoranschlag – die schnelle und direkte Ermittlung eines Richtpreises für den
-                    Kunden<br><br>
-                    Anfrage an TGA – Ermittlung eines Richtpreises für den Kunden, jedoch mit der Möglichkeit ein
-                    qualifiziertes
-                    Angebot von TGA per Mail anzufragen.<br>
-                </p>
+                    <div class="kalk-card" onclick="showPage('page-5')">
+                        <strong>Anfrage an TGA</strong>
+                        <span>Richtpreis ermitteln und anschließend ein qualifiziertes Angebot per Mail anfragen.</span>
+                    </div>
+
+                    <div class="kalk-card" onclick="showPage('page-3-1')">
+                        <strong>Info</strong>
+                        <span>Der Weg zur Photovoltaikanlage.</span>
+                    </div>
+                </div>
 
                 <button id="btnExportLog" class="hidden" onclick="exportLoginLog()">Login-Log herunterladen</button>
                 <button id="btnAdmin" class="hidden" onclick="showPage('page-admin')">Adminbereich</button>
@@ -502,36 +507,28 @@
             <div class="page" id="page-4">
                 <h2>Hauptmenü</h2>
 
-                <button onclick="showPage('page-6')">DC</button>
-                <button onclick="showPage('page-7')">AC</button><br><br>
-                <p class="hint">
-                    <strong>_________________________________</strong><br><br>
-                </p>
+                <div class="kalk-card-row">
+                    <div class="kalk-card" onclick="showPage('page-6')">
+                        <strong>DC</strong>
+                        <span>Flachdach, Schrägdach, Optimierer und Gerüst.</span>
+                    </div>
 
-                <button class="btn-komplett" onclick="toggleKomplettFlow()">Komplettleistung</button>
-                <span id="komplett-indicator" class="flow-indicator">AUS</span>
-                <br>
-                <p>Wenn Sie die <strong>Komplettleistung</strong> auswählen, werden Sie Schritt für Schritt durch alle
-                    benötigten Punkte geführt.<br>
-                    Der <strong>blaue „Weiter“-Button</strong> signalisiert, dass Sie sich im geführten Komplett-Bereich
-                    befinden.<br>
-                    Durch Betätigen von <strong>F5 (Seite neu laden)</strong> oder der Aktion <strong>„Eingaben
-                        löschen“</strong> werden alle Eingaben zurückgesetzt.<br>
-                    Wenn Sie ins <strong>Hauptmenü zurückkehren</strong> oder den Bereich verlassen, bleiben Ihre
-                    Eingaben
-                    erhalten und<br>
-                    Sie können die Konfiguration jederzeit an beliebiger Stelle fortsetzen.</p>
-                <br>
-                <br>
-                <p class="hint">
-                    <strong>_________________________________</strong><br><br>
+                    <div class="kalk-card" onclick="showPage('page-7')">
+                        <strong>AC</strong>
+                        <span>Wechselrichter, Speicher, Wallbox, Zählerschrank und Zubehör.</span>
+                    </div>
+
+                    <div class="kalk-card" onclick="toggleKomplettFlow()">
+                        <strong>Komplettleistung</strong>
+                        <span>Geführter Ablauf durch alle benötigten Punkte.</span>
+                    </div>
+
+                </div>
+
+                <p>
+                    Status Komplettleistung:
+                    <span id="komplett-indicator" class="flow-indicator">AUS</span>
                 </p>
-                <br>
-                <button onclick="showPage('page-25')">Dienstleistungen</button>
-                <button onclick="showPage('page-14-1')">Downloadbereich</button>
-                <br>
-                <br>
-                <button onclick="showPage('page-3')">Zurück zur Auswahl "KV oder Anfrage"</button>
 
             </div>
 
@@ -678,10 +675,6 @@
                     <button onclick="showPage('page-23')">Schrägdach</button><br>
                 </div>
 
-                <!-- Navigationsbuttons nebeneinander -->
-                <div style="margin-top:40px;">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
-                </div>
             </div>
 
             <!-- SEITE 7: MENÜ AC -->
@@ -696,11 +689,6 @@
                     <button onclick="showPage('page-20')">Zählerschrank</button><br>
                 </div>
 
-                <!-- Navigationsbuttons nebeneinander -->
-                <div style="margin-top:40px;">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
-
-                </div>
             </div>
 
             <!-- SEITE 14: Wechselrichter strang -->
@@ -710,7 +698,6 @@
                 <div id="page14-content" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter21Normal" onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                     <button id="btnWeiter14Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-18')">Weiter</button>
@@ -752,7 +739,6 @@
 
                 <br><br>
 
-                <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
             </div>
 
             <!-- SEITE 14.3:   -->
@@ -799,7 +785,6 @@
 
                 <!-- Buttons -->
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button onclick="printPage40()">Drucken / speichern als PDF</button>
                     <button onclick="sendPage40MailByType()">Per E-Mail senden</button>
                     <button onclick="sharePdf()">PDF download</button>
@@ -816,8 +801,7 @@
 
                 <div class="button-bar">
                     <button onclick="showPage('page-5')">Zur Anfrage</button>
-                    <button onclick="showPage('page-40')">KV anzeigen</button><br>
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
+                    <button onclick="showPage('page-40')">KV anzeigen</button>
                 </div>
             </div>
 
@@ -854,7 +838,6 @@
                 </p>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter15Normal" onclick="showPage('page-6')">Weiter</button>
                     <button id="btnWeiter15Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-6')">Weiter</button>
@@ -870,7 +853,6 @@
                 <div id="content-14-2" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter142Normal" onclick="showPage('page-21')">Weiter</button>
                     <button id="btnWeiter142Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-21')">Weiter</button>
@@ -885,7 +867,6 @@
                 <div id="content-8" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter8Normal" onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                     <button id="btnWeiter8Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-9')">Weiter</button>
@@ -899,8 +880,6 @@
                 <div id="content-18" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
-
                     <button id="btnWeiter18Normal" onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                     <button id="btnWeiter18Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-20')">Weiter</button>
@@ -915,7 +894,6 @@
                 <div id="content-20" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter20Normal" onclick="showPage('page-22')">Weiter</button>
                     <button id="btnWeiter20Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-22')">Weiter</button>
@@ -931,7 +909,6 @@
                 <div id="content-21" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter21Normal" onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                     <button id="btnWeiter21Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-10-1')">Weiter</button>
@@ -945,7 +922,6 @@
                 <div id="content-22" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter22Normal" onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                     <button id="btnWeiter22Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-25')">Weiter</button>
@@ -959,7 +935,6 @@
                 <div id="content-9" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter9Normal" onclick="showPage('page-11')">Weiter</button>
                     <button id="btnWeiter9Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-14-2')">Weiter</button>
@@ -974,7 +949,6 @@
                 <div id="content-10" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter10Normal" onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                     <button id="btnWeiter10Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-18')">Weiter</button>
@@ -989,7 +963,6 @@
                 <div id="content-26" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter26Normal" onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                     <button id="btnWeiter26Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-18')">Weiter</button>
@@ -1001,8 +974,8 @@
                 <h2>Menü Speicher</h2>
 
                 <div>
-                    <button onclick="showPage('page-26')">Typ "Fronius"</button>
-                    <button onclick="showPage('page-10')">Typ "BYD"</button>
+                    <button class="submenu-button" onclick="showPage('page-26')">Typ "Fronius"</button><br>
+                    <button class="submenu-button" onclick="showPage('page-10')">Typ "BYD"</button><br>
                 </div>
 
                 <br>
@@ -1015,14 +988,10 @@
 
                 <!-- Auswahlbuttons untereinander -->
                 <div>
-                    <button onclick="showPage('page-14')">Typ "strang"</button><br>
-                    <button onclick="showPage('page-14-2')">Typ "hybrid"</button><br>
+                    <button class="submenu-button" onclick="showPage('page-14')">Typ "strang"</button><br>
+                    <button class="submenu-button" onclick="showPage('page-14-2')">Typ "hybrid"</button><br>
                 </div>
 
-                <!-- Navigationsbuttons nebeneinander -->
-                <div style="margin-top:40px;">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
-                </div>
             </div>
 
             <!-- SEITE 23: Schrägdach -->
@@ -1032,7 +1001,6 @@
                 <div id="content-23" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter23Normal" onclick="showPage('page-8')">Weiter</button>
                     <button id="btnWeiter23Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-8')">Weiter</button>
@@ -1047,8 +1015,6 @@
                 <div id="content-24" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
-
                     <button id="btnWeiter24Normal" onclick="showPage('page-8')">Weiter</button>
                     <button id="btnWeiter24Komplett" class="btn-komplett hidden"
                         onclick="showPage('page-8')">Weiter</button>
@@ -1063,7 +1029,6 @@
                 <div id="content-25" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button id="btnWeiter25Normal" onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                     <button id="btnWeiter25Komplett" class="btn-komplett hidden"
                         onclick="direktZumAngebot()">Weiter</button>
@@ -1077,9 +1042,7 @@
                 <button onclick="showPage('page-30')">Handelsmarke</button>
                 <button onclick="showPage('page-31')">Uponor</button>
                 <button onclick="showPage('page-32')">Roth</button>
-                <br><br>
 
-                <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
             </div>
 
             <!-- SEITE 27:  -->
@@ -1091,7 +1054,6 @@
                 <div class="button-bar">
                     <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button onclick="showPage('page-18')">Weiter</button>
-                    <button onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                 </div>
             </div>
 
@@ -1102,7 +1064,6 @@
                 <div id="content-28" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button onclick="showPage('page-18')">Weiter</button>
                     <button onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                 </div>
@@ -1115,7 +1076,6 @@
                 <div id="content-30" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button onclick="showPage('page-18')">Weiter</button>
                     <button onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                 </div>
@@ -1128,7 +1088,6 @@
                 <div id="content-31" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button onclick="showPage('page-18')">Weiter</button>
                     <button onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                 </div>
@@ -1141,7 +1100,6 @@
                 <div id="content-32" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button onclick="showPage('page-18')">Weiter</button>
                     <button onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                 </div>
@@ -1154,7 +1112,6 @@
                 <div id="content-33" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button onclick="showPage('page-20')">Weiter</button>
                     <button onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                 </div>
@@ -1167,7 +1124,6 @@
                 <div id="content-13" class="price-table"></div>
 
                 <div class="button-bar">
-                    <button onclick="showPage('page-4')">Zurück zum Hauptmenü</button>
                     <button onclick="direktZumAngebot()">Direkt zur Ausgabeseite</button>
                 </div>
             </div>
