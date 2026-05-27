@@ -1570,19 +1570,32 @@ async function clearUploadedFilesFromStorage() {
   const files = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
 
   for (const file of files) {
-    if (!file.path) continue;
+    if (!file?.path) continue;
 
     try {
       const fileRef = storageRef(blazeStorage, file.path);
       await deleteObject(fileRef);
     } catch (err) {
-      console.warn("Temporäre Datei konnte nicht gelöscht werden:", err);
+      console.warn("Datei konnte nicht aus Storage gelöscht werden:", file?.name, err);
     }
   }
 
-  uploadedFiles = [];
   localStorage.removeItem("uploadedFiles");
+
+  const fileInput = document.getElementById("request-files");
+  if (fileInput) fileInput.value = "";
+
+  uploadedFiles = [];
+  renderFileList();
+
+  const uploadedFilesSection = document.getElementById("uploaded-files-section");
+  const uploadedFilesSummary = document.getElementById("uploaded-files-summary");
+
+  if (uploadedFilesSummary) uploadedFilesSummary.innerHTML = "";
+  if (uploadedFilesSection) uploadedFilesSection.style.display = "none";
 }
+
+window.clearUploadedFilesFromStorage = clearUploadedFilesFromStorage;
 
 window.handleFileUpload = handleFileUpload;
 window.removeFile = removeFile;
