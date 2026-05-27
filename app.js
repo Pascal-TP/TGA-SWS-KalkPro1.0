@@ -232,6 +232,14 @@ function showConfirm(text, onOk) {
   modal.style.display = "block";
 }
 
+function confirmClearInputs() {
+  showConfirm("Alle Eingaben wirklich löschen?", () => {
+    clearInputs();
+  });
+}
+
+window.confirmClearInputs = confirmClearInputs;
+
 window.showHinweis = showHinweis;
 window.closeHinweis = closeHinweis;
 window.showConfirm = showConfirm;
