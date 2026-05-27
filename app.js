@@ -463,6 +463,24 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
+import {
+  getFunctions,
+  httpsCallable
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-functions.js";
+
+import {
+  initializeAppCheck,
+  ReCaptchaV3Provider
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app-check.js";
+
+import {
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+  uploadBytesResumable,
+  deleteObject
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAMiqXQZPssjlXgDWAQBchmPS0uedDtX2c",
   authDomain: "pw-sws-tga.firebaseapp.com",
@@ -473,8 +491,31 @@ const firebaseConfig = {
   measurementId: "G-GE3NP65KYQ"
 };
 
+const blazeConfig = {
+  apiKey: "AIzaSyCcHI5sGR7sFwrWRpo2uQ3Plm0HpTvqr30",
+  authDomain: "kalkpro-4cc29.firebaseapp.com",
+  projectId: "kalkpro-4cc29",
+  storageBucket: "kalkpro-4cc29.firebasestorage.app",
+  messagingSenderId: "185447466021",
+  appId: "1:185447466021:web:e0d0720fae971b4ab52bcc",
+  measurementId: "G-V4SF92V16K"
+};
+
+const blazeApp = initializeApp(blazeConfig, "blazeApp");
+const blazeFunctions = getFunctions(blazeApp, "europe-west1");
+const blazeStorage = getStorage(blazeApp);
+
+let uploadedFiles = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
+
 const fbApp = initializeApp(firebaseConfig);
+
+const appCheck = initializeAppCheck(fbApp, {
+  provider: new ReCaptchaV3Provider("6Lfduv4sAAAAAMNyHh2V996lDK7KX6ily1Ba8-Az"),
+  isTokenAutoRefreshEnabled: true
+});
+
 const auth = getAuth(fbApp);
+
 (async () => {
   // 1) Persistenz: nichts im Browser behalten
   await setPersistence(auth, browserSessionPersistence);
@@ -492,7 +533,7 @@ const auth = getAuth(fbApp);
     const info = document.getElementById("login-info");
 
     if (user) {
-       document.body.classList.add("is-logged-in");
+      document.body.classList.add("is-logged-in");
       startTimer();
       // UI
       actions?.classList.remove("hidden");
@@ -507,9 +548,9 @@ const auth = getAuth(fbApp);
     } else {
       // UI
       actions?.classList.add("hidden");
-          clearInterval(logoutTimer);
-    sessionStorage.removeItem(LOGOUT_DEADLINE_KEY);
-    document.body.classList.remove("is-logged-in");
+      clearInterval(logoutTimer);
+      sessionStorage.removeItem(LOGOUT_DEADLINE_KEY);
+      document.body.classList.remove("is-logged-in");
       if (info) info.innerText = "";
       updateAdminUI_();
 
