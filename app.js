@@ -1413,7 +1413,7 @@ function submitPage5() {
     { id: "jahresstrombedarf", name: "Jahresstrombedarf kWh" },
     { id: "waermepumpe_strombedarf", name: "Wärmepumpe Strombedarf kWh" },
     { id: "wallbox", name: "Wallbox" },
-    { id: "copy-email", name: "E-Mail-Adresse für Kopie *" }
+    { id: "copy-email", name: "E-Mail-Adresse für Kopie" }
   ];
 
   let missing = [];
