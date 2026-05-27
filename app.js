@@ -680,6 +680,13 @@ async function registerRequest() {
     return;
   }
 
+  const recaptchaToken = grecaptcha?.getResponse();
+
+  if (!recaptchaToken) {
+    if (err) err.innerText = "Bitte bestätigen Sie: Ich bin kein Roboter.";
+    return;
+  }
+
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, makeTempPassword());
 
@@ -737,6 +744,9 @@ async function registerRequest() {
       } else {
         err.innerText = "Registrierung fehlgeschlagen. Bitte prüfen und erneut versuchen.";
       }
+    }
+    if (window.grecaptcha) {
+      grecaptcha.reset();
     }
   }
 }
