@@ -1948,6 +1948,23 @@ async function loadPage40() {
 
     };
 
+    const uploadedFilesSection = document.getElementById("uploaded-files-section");
+    const uploadedFilesSummary = document.getElementById("uploaded-files-summary");
+
+    if (uploadedFilesSection && uploadedFilesSummary) {
+      const files = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
+
+      if (files.length > 0) {
+        uploadedFilesSummary.innerHTML = files
+          .map(file => `<div style="margin:6px 0;">• ${file.name}</div>`)
+          .join("");
+        uploadedFilesSection.style.display = "block";
+      } else {
+        uploadedFilesSummary.innerHTML = "";
+        uploadedFilesSection.style.display = "none";
+      }
+    }
+
 
     let html = "";
     Object.keys(labels).forEach(id => {
