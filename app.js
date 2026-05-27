@@ -691,6 +691,28 @@ async function registerRequest() {
       status: "pending"
     });
 
+    const sendRegistrationNotification = httpsCallable(
+      blazeFunctions,
+      "sendRegistrationNotification"
+    );
+
+    await sendRegistrationNotification({
+      toolName: "TGA-SWS KalkPro2.0",
+
+      adminEmails: [
+        "pascal.gasch@tpholding.de",
+        "julian.kniep@tga-nord.de",
+        "marcel.zens@tpholding.de"
+      ],
+
+      firma,
+      name,
+      email,
+      tel,
+      plz,
+      ort
+    });
+
     await signOut(auth);
 
     if (info) info.innerText = "Registrierung eingegangen. Du erhältst Zugang nach Freigabe.";
@@ -2078,6 +2100,18 @@ function sendMailPage40() {
   window.location.href =
     `mailto:${mailAdresse}?subject=${encodeURIComponent(subject)}&body=${body}`;
 }
+
+function sendPage40MailByType() {
+  const angebotTyp = localStorage.getItem("angebotTyp") || "kv";
+
+  if (angebotTyp === "anfrage") {
+    sendRequestPdfByEmail();
+  } else {
+    sendMailPage40();
+  }
+}
+
+window.sendPage40MailByType = sendPage40MailByType;
 
 // -----------------------------
 // clearInputs - Button "Eingaben löschen"
@@ -4718,6 +4752,147 @@ async function sharePdf() {
 }
 
 window.sharePdf = sharePdf;
+
+async function buildPage40PdfBlob() {
+  const oldScrollX = window.scrollX || 0;
+  const oldScrollY = window.scrollY || 0;
+
+  window.scrollTo(0, 0);
+  await new Promise(r => requestAnimationFrame(r));
+
+  const h2p = window.html2pdf;
+  if (!h2p) {
+    window.scrollTo(oldScrollX, oldScrollY);
+    throw new Error("html2pdf ist nicht geladen.");
+  }
+
+  const el = document.getElementById("page-40");
+  if (!el) {
+    window.scrollTo(oldScrollX, oldScrollY);
+    throw new Error("Seite 40 nicht gefunden.");
+  }
+
+  if (typeof page40Promise !== "undefined" && page40Promise) {
+    await page40Promise;
+    await new Promise(r => setTimeout(r, 150));
+  }
+
+  const angebotTyp = localStorage.getItem("angebotTyp") || "kv";
+  const datum = new Date().toLocaleDateString("de-DE").replaceAll(".", "-");
+  const filename = (angebotTyp === "anfrage")
+    ? `Anfrage_TGA-SWS_${datum}.pdf`
+    : `Kostenvoranschlag_TGA-SWS_${datum}.pdf`;
+
+  document.body.classList.add("pdf-mode");
+
+  let tempLogo = null;
+  const existingLogo = document.querySelector("img.logo");
+  if (existingLogo) {
+    tempLogo = existingLogo.cloneNode(true);
+    tempLogo.classList.add("temp-pdf-logo");
+    el.insertBefore(tempLogo, el.firstChild);
+  }
+
+  await new Promise(r => requestAnimationFrame(r));
+
+  try {
+    const opt = {
+      margin: 10,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff",
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: document.documentElement.scrollWidth,
+        windowHeight: document.documentElement.scrollHeight
+      },
+      pagebreak: { mode: ["css", "legacy"] },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+    };
+
+    const worker = h2p().set(opt).from(el).toPdf();
+    const pdf = await worker.get("pdf");
+    if (!pdf) throw new Error("PDF-Objekt ist null.");
+
+    const blob = pdf.output("blob");
+    return { blob, filename };
+
+  } finally {
+    if (tempLogo) tempLogo.remove();
+    document.body.classList.remove("pdf-mode");
+    window.scrollTo(oldScrollX, oldScrollY);
+  }
+}
+
+async function sendRequestPdfByEmail() {
+  const angebotTyp = localStorage.getItem("angebotTyp") || "kv";
+  if (angebotTyp !== "anfrage") {
+    showHinweis("Der PDF-Versand ist nur für Anfragen vorgesehen.");
+    return;
+  }
+
+  const page5Data = JSON.parse(localStorage.getItem("page5Data") || "{}");
+  const requesterEmail = (page5Data["shk-email"] || "").trim().toLowerCase();
+
+  if (!requesterEmail) {
+    showHinweis("Bitte geben Sie auf Seite 5 eine SHK-E-Mail-Adresse an.");
+    return;
+  }
+
+  try {
+    showLoader40(true);
+
+    const { blob, filename } = await buildPage40PdfBlob();
+
+    const requesterKey = requesterEmail.replace(/[^a-z0-9._-]/g, "_");
+    const path = `requests/${requesterKey}/${Date.now()}_${filename}`;
+
+    const fileRef = storageRef(blazeStorage, path);
+    await uploadBytes(fileRef, blob, {
+      contentType: "application/pdf"
+    });
+
+    const uploadedFiles = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
+
+    const sendPdfMail = httpsCallable(blazeFunctions, "sendRequestPdfMail");
+    await sendPdfMail({
+      toolName: "TGA-SWS KalkPro2.0",
+      storagePath: path,
+      filename,
+      to: "info@tga-nord.de",
+      cc: requesterEmail,
+      requesterEmail,
+      angebotTyp,
+      shkName: "",
+      shkContact: page5Data["shk-contact"] || "",
+      shkEmail: requesterEmail,
+      siteAddress: [
+        page5Data["bv-contact"] || "",
+        page5Data["bv-strasse"] || "",
+        page5Data["bv-ort"] || ""
+      ].filter(Boolean).join(", "),
+      offerDate: "",
+      executionDate: page5Data["execution-date"] || "",
+      attachmentFiles: uploadedFiles
+    });
+
+    showHinweis("Anfrage erfolgreich versendet.", async () => {
+      await clearInputs();
+      history.replaceState({ page: "page-login" }, "", "#page-login");
+      location.reload();
+    });
+
+  } catch (err) {
+    console.error("sendRequestPdfByEmail Fehler:", err);
+    showHinweis("Die Anfrage konnte nicht versendet werden:\n" + (err?.message || err));
+  } finally {
+    showLoader40(false);
+  }
+}
+
+window.sendRequestPdfByEmail = sendRequestPdfByEmail;
 
 // -----------------------------
 // showLoader40 - EIERUHR 
