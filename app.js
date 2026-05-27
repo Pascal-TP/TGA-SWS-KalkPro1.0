@@ -190,8 +190,7 @@ function startSplashScreen() {
 // Hinweistexte in eigenen Hinweisfenster
 // -----------------------------
 
-function showHinweis(text) {
-
+function showHinweis(text, onOk) {
   const modal = document.getElementById("hinweisModal");
   const textBox = document.getElementById("hinweisText");
   const okBtn = document.getElementById("hinweisOk");
@@ -199,8 +198,14 @@ function showHinweis(text) {
 
   textBox.innerText = text;
 
-  cancelBtn.style.display = "none";   // Abbrechen ausblenden
-  okBtn.onclick = closeHinweis;
+  cancelBtn.style.display = "none";
+
+  okBtn.onclick = async () => {
+    closeHinweis();
+    if (typeof onOk === "function") {
+      await onOk();
+    }
+  };
 
   modal.style.display = "block";
 }
@@ -4995,9 +5000,9 @@ async function sendRequestPdfByEmail() {
     });
 
     showHinweis("Anfrage erfolgreich versendet.", async () => {
-      await clearInputs();
-      history.replaceState({ page: "page-login" }, "", "#page-login");
-      location.reload();
+      await clearUploadedFilesFromStorage();
+      clearInputs();
+      showPage("page-3");
     });
 
   } catch (err) {
