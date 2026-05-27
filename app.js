@@ -1412,7 +1412,8 @@ function submitPage5() {
     { id: "wechselrichter_speicher", name: "Standort Wechselrichter + Speicher" },
     { id: "jahresstrombedarf", name: "Jahresstrombedarf kWh" },
     { id: "waermepumpe_strombedarf", name: "Wärmepumpe Strombedarf kWh" },
-    { id: "wallbox", name: "Wallbox" }
+    { id: "wallbox", name: "Wallbox" },
+    { id: "copy-email", name: "E-Mail-Adresse für Kopie *" }
   ];
 
   let missing = [];
@@ -1423,6 +1424,11 @@ function submitPage5() {
   });
 
   const errorDiv = document.getElementById("page5-error");
+
+  if (!data["copy-email"]) {
+    showHinweis("Bitte E-Mail-Adresse für die Kopie der Anfrage eingeben.");
+    return false;
+  }
 
   if (missing.length > 0) {
     errorDiv.innerText = "Bitte folgende Felder ausfüllen:\n" + missing.join(", ");
@@ -1439,7 +1445,7 @@ function submitPage5() {
 function savePage5Data() {
   const ids = [
     "bv-contact", "bv-strasse", "bv-ort", "shk-contact",
-    "shk-email", "shk-phone", "execution-date", "dachpfanne-ausfuehrung", "zeichnung-plaene", "zaehlerschrank", "wechselrichter_speicher", "jahresstrombedarf", "waermepumpe_strombedarf", "wallbox"
+    "shk-email", "shk-phone", "execution-date", "dachpfanne-ausfuehrung", "zeichnung-plaene", "zaehlerschrank", "wechselrichter_speicher", "jahresstrombedarf", "waermepumpe_strombedarf", "wallbox", "copy-email"
 
   ];
 
@@ -4932,7 +4938,7 @@ async function sendRequestPdfByEmail() {
   }
 
   const page5Data = JSON.parse(localStorage.getItem("page5Data") || "{}");
-  const requesterEmail = (page5Data["shk-email"] || "").trim().toLowerCase();
+  const requesterEmail = (page5Data["copy-email"] || "").trim().toLowerCase();
 
   if (!requesterEmail) {
     showHinweis("Bitte geben Sie auf Seite 5 eine SHK-E-Mail-Adresse an.");
