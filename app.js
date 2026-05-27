@@ -439,9 +439,6 @@ function resetStoredInputsOnReload() {
   keysToRemove.forEach(k => localStorage.removeItem(k));
 }
 
-// SOFORT ausführen (möglichst früh)
-resetStoredInputsOnReload();
-
 
 // -----------------------------
 // Firebase - E-Mail+Passwort
@@ -517,6 +514,8 @@ const blazeFunctions = getFunctions(blazeApp, "europe-west1");
 const blazeStorage = getStorage(blazeApp);
 
 let uploadedFiles = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
+
+resetStoredInputsOnReload();
 
 const fbApp = initializeApp(firebaseConfig);
 
