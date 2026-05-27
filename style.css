@@ -1,30 +1,50 @@
+:root {
+  --primary: #0b2a4a;
+  --primary-hover: #163f6f;
+  --bg: #efefef;
+  --card: #ffffff;
+  --input: #fff6d5;
+  --border: #d7d7d7;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --accent: #e9f1f8;
+  --danger: #b00020;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: #efefef;
-    text-align: center;
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
 }
 
 .logo {
-    margin: 150px auto 30px;
-    display: block;
-    width: 50%;
-    max-width: 400px;
+  margin: 150px auto 30px;
+  display: block;
+  width: 50%;
+  max-width: 400px;
 }
 
 .Bild_Versicherung {
-    margin: 30px auto;
-    display: block;
-    width: 50%;
-    max-width: 150px;
+  margin: 30px auto;
+  display: block;
+  width: 50%;
+  max-width: 150px;
 }
 
 .page {
-    display: none;
+  display: none;
 }
 
 .page.active {
-    display: block;
+  display: block;
 }
 
 /* Ohne JS (html hat keine Klasse "js") sollen KEINE Seiten sichtbar sein */
@@ -34,173 +54,219 @@ html:not(.js) .page.active {
 }
 
 input {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;   
-    width: 250px;
-    background: #fff6d5;
-    border: 1px solid #ccc;
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 250px;
+  background: #fff6d5;
+  border: 1px solid #ccc;
 }
 
 button {
-    background: #4dad32;
-    color: black;
-    border: none;
-    padding: 12px 22px;
-    margin: 6px;
-    cursor: pointer;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: 0.2s ease;
+  background: #4dad32;
+  color: black;
+  border: none;
+  padding: 12px 22px;
+  margin: 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.2s ease;
 }
 
 button:hover {
-    background: #6ff77f;
-    transform: translateY(-1px);
+  background: #6ff77f;
+  transform: translateY(-1px);
 }
 
 button:active {
-    transform: translateY(0px);
+  transform: translateY(0px);
 }
 
 .error {
-    color: darkred;
-    margin: 10px;
+  color: darkred;
+  margin: 10px;
 }
 
 .hint {
-    max-width: 800px;
-    margin: 20px auto;
-    font-size: 14px;
+  max-width: 800px;
+  margin: 20px auto;
+  font-size: 14px;
 }
 
 #release-info {
-    position: fixed;
-    top: 10px;
-    right: 15px;
-    font-size: 14px;
-    text-align: right;
+  position: fixed;
+  top: 10px;
+  right: 15px;
+  font-size: 14px;
+  text-align: right;
 }
 
 #timer {
-    position: fixed;
-    top: 30px;
-    right: 15px;
-    font-size: 14px;
-    text-align: right;
+  position: fixed;
+  top: 30px;
+  right: 15px;
+  font-size: 14px;
+  text-align: right;
 }
 
 #login-info {
-    position: fixed;
-    top: 50px;              /* unter dem Timer */
-    right: 15px;
-    font-size: 14px;
-    text-align: right;
+  position: fixed;
+  top: 50px;
+  /* unter dem Timer */
+  right: 15px;
+  font-size: 14px;
+  text-align: right;
 }
 
 /* ================================
    TITEL / UNTERTITEL / ZWISCHENTITEL – global
 ================================ */
-.title { text-align: center;font-weight: bold; font-size: 24px; margin-top: 25px; }
-.subtitle { text-align: center;font-weight: bold; font-size: 18px; margin-top: 20px; }
-.midtitle { text-align: center;font-weight: bold; font-size: 16px; margin-top: 15px; }
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 25px;
+}
+
+.subtitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.midtitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 15px;
+}
 
 .beschreibung-fett {
   font-weight: 700;
 }
 
 .price-table {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
 }
 
 .price-table .row {
-    display: grid;
-    grid-template-columns: 160px 4fr 100px 100px 120px 120px;
-    gap: 15px;
-    margin-bottom: 12px;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 160px 4fr 100px 100px 120px 120px;
+  gap: 15px;
+  margin-bottom: 12px;
+  align-items: center;
 }
 
-.price-table .col-a { text-align: left; font-weight: bold; }
-.price-table .col-b { text-align: left; padding-left: 5px; }
+.price-table .col-a {
+  text-align: left;
+  font-weight: bold;
+}
+
+.price-table .col-b {
+  text-align: left;
+  padding-left: 5px;
+}
+
 .price-table .col-c,
 .price-table .col-d,
-.price-table .col-e { text-align: right; }
-.price-table .col-f { text-align: right; }
+.price-table .col-e {
+  text-align: right;
+}
+
+.price-table .col-f {
+  text-align: right;
+}
 
 
 .price-table input.menge-input {
-    background-color: #fff8dc;
-    padding: 5px;
-    width: 80px;
-    text-align: center;
+  background-color: #fff8dc;
+  padding: 5px;
+  width: 80px;
+  text-align: center;
 }
+
 /* ================================
    Smartphone – global für alle Seiten
 ================================ */
 @media (max-width: 600px) {
-    .row { display: block; }
+  .row {
+    display: block;
+  }
 
-    .row > div,
-    .row > input {
-        display: block;
-        width: 100%;
-        text-align: left;
-        margin-bottom: 5px;
-    }
+  .row>div,
+  .row>input {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+  }
 
-    input.menge-input { width: 100%; }
+  input.menge-input {
+    width: 100%;
+  }
 }
 
 #page-40 {
-    max-width: 1100px;
-    margin: auto;
-    padding: 30px;
-    background: white;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px;
+  background: white;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
+
 .row {
-    display: grid;
-    grid-template-columns: 
-        80px       /* Pos */
-        1.5fr      /* Beschreibung */
-        1fr        /* Zusatz */
-        100px      /* Menge */
-        120px      /* EP */
-        120px;     /* Gesamt */
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 6px;
+  display: grid;
+  grid-template-columns:
+    80px
+    /* Pos */
+    1.5fr
+    /* Beschreibung */
+    1fr
+    /* Zusatz */
+    100px
+    /* Menge */
+    120px
+    /* EP */
+    120px;
+  /* Gesamt */
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 6px;
 }
+
 .menge-input {
-    width: 80px;
-    text-align: right;
+  width: 80px;
+  text-align: right;
 }
 
 /* ================================
    Allgemeine Hinweise (tga12.csv)
 ================================ */
 #hinweise-content {
-    text-align: left;
+  text-align: left;
 }
 
 #hinweise-content .title,
 #hinweise-content .subtitle,
 #hinweise-content .midtitle {
-    text-align: left;
+  text-align: left;
 }
 
 #hinweise-content .hinweis-row {
-    text-align: left;
-    margin: 6px 0;
-    line-height: 1.5;
+  text-align: left;
+  margin: 6px 0;
+  line-height: 1.5;
 }
+
 #hinweise-content {
-    max-width: 1000px;
-    margin: 30px auto;
+  max-width: 1000px;
+  margin: 30px auto;
 }
+
 .hidden {
   display: none !important;
 }
@@ -248,13 +314,22 @@ body.app-locked #page-hinweis.active {
 @media print {
 
   /* alles ausblenden */
-  .page { display: none !important; }
+  .page {
+    display: none !important;
+  }
 
   /* nur Seite 40 drucken */
-  #page-40 { display: block !important; }
+  #page-40 {
+    display: block !important;
+  }
 
   /* Buttons/Nav etc. ausblenden */
-  button, .nav, #timer, #login-info, #release-info, #user-actions {
+  button,
+  .nav,
+  #timer,
+  #login-info,
+  #release-info,
+  #user-actions {
     display: none !important;
   }
 }
@@ -267,38 +342,40 @@ body.app-locked #page-hinweis.active {
   padding-bottom: 6px;
 }
 
-.table-header > div {
+.table-header>div {
   opacity: 0.9;
 }
 
-.header-img-cell{
-  display:flex;
-  align-items:center;
+.header-img-cell {
+  display: flex;
+  align-items: center;
 }
 
-.header-img{
-  width: 140px;     /* anpassen */
+.header-img {
+  width: 140px;
+  /* anpassen */
   height: auto;
-  display:block;
+  display: block;
 }
 
-.with-pos-images .row{
-  display:grid;
-  grid-template-columns: 60px 160px 4fr 100px 100px 120px 120px; /* Bild + 6 Spalten */
+.with-pos-images .row {
+  display: grid;
+  grid-template-columns: 60px 160px 4fr 100px 100px 120px 120px;
+  /* Bild + 6 Spalten */
   gap: 15px;
-  align-items:center;
+  align-items: center;
 }
 
-.pos-img-cell{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.pos-img-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.pos-img{
+.pos-img {
   max-height: 42px;
   width: auto;
-  display:block;
+  display: block;
 }
 
 
@@ -312,7 +389,7 @@ body.pdf-mode #release-info {
 }
 
 /* Das „normale“ Logo oben außerhalb von Seite 40 im PDF ausblenden */
-body.pdf-mode > img.logo {
+body.pdf-mode>img.logo {
   display: none !important;
 }
 
@@ -333,13 +410,14 @@ body.pdf-mode > img.logo {
 .loader {
   position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 9999;
 }
+
 .loader.hidden {
   display: none !important;
 }
@@ -361,9 +439,14 @@ body.pdf-mode > img.logo {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
-body.pdf-mode #loader40 { display: none !important; }
+
+body.pdf-mode #loader40 {
+  display: none !important;
+}
 
 select {
   display: block;
@@ -373,9 +456,11 @@ select {
   background: #fff6d5;
   border: 1px solid #ccc;
 }
+
 #user-menu-wrapper {
   position: fixed;
-  top: 70px;          /* unter Release + Timer */
+  top: 70px;
+  /* unter Release + Timer */
   right: 15px;
   text-align: right;
   z-index: 1000;
@@ -396,7 +481,8 @@ select {
 
 #user-actions {
   position: fixed;
-  top: 70px;        /* unterhalb von login-info */
+  top: 70px;
+  /* unterhalb von login-info */
   right: 15px;
   text-align: right;
   z-index: 1000;
@@ -409,37 +495,45 @@ select {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
+
 #user-action-select option[value="logout"] {
   font-weight: 700;
-  color: #b00020; /* dezentes Rot */
+  color: #b00020;
+  /* dezentes Rot */
 }
+
 .start-slogan {
   margin-top: 20px;
   font-size: 20px;
   font-weight: 500;
   color: #333;
 }
+
 /* ================================
    KOMPLETT-FLOW BUTTONS (BLAU)
 ================================ */
 button.btn-komplett {
-  background: #2f6fed;       /* Blau */
+  background: #2f6fed;
+  /* Blau */
   color: white;
 }
 
 button.btn-komplett:hover {
-  background: #5a8cff;       /* helleres Blau */
+  background: #5a8cff;
+  /* helleres Blau */
   transform: translateY(-1px);
 }
 
 button.btn-komplett:active {
-  background: #1f55c9;       /* dunkler beim Klick */
+  background: #1f55c9;
+  /* dunkler beim Klick */
   transform: translateY(0px);
 }
+
 /* ================================
    WR Empfehlung / Ausgrauen / Warnung
 ================================ */
-.wr-reco-box{
+.wr-reco-box {
   max-width: 1100px;
   margin: 10px auto 18px auto;
   padding: 12px 14px;
@@ -447,20 +541,22 @@ button.btn-komplett:active {
   text-align: left;
   font-weight: 600;
   background: #eaf2ff;
-  border: 1px solid rgba(47,111,237,0.35);
+  border: 1px solid rgba(47, 111, 237, 0.35);
 }
 
-.wr-dimmed{
+.wr-dimmed > :not(.wr-warn) {
   opacity: 0.35;
   filter: grayscale(1);
 }
 
-.wr-warn{
+.wr-warn {
   grid-column: 1 / -1;
   text-align: left;
-  color: darkred;
-  font-weight: 700;
-  margin-top: 4px;
+  color: #c40000 !important;
+  font-weight: 800;
+  margin-top: 6px;
+  opacity: 1 !important;
+  filter: none !important;
 }
 
 /* =========================================
@@ -523,91 +619,101 @@ body.pdf-mode #page-40 .hinweis-row {
 }
 
 /* === Legal Links (Datenschutz/Impressum) === */
-.legal-links{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
+.legal-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   margin: 12px 0;
   flex-wrap: wrap;
 }
 
-.legal-link{
+.legal-link {
   color: #0b2a4a;
   text-decoration: underline;
   font-weight: 600;
   cursor: pointer;
 }
 
-.legal-link:hover{
+.legal-link:hover {
   opacity: 0.85;
 }
 
-.legal-sep{
+.legal-sep {
   opacity: 0.6;
 }
 
 /* === Checkbox-Block zentriert, Text darin links === */
-.ack-row{
-  display:flex;
-  justify-content:center;
+.ack-row {
+  display: flex;
+  justify-content: center;
   margin: 12px 0;
 }
 
 /* Checkbox + Text kompakt */
-.ack-label{
+.ack-label {
   display: inline-flex;
   align-items: center;
-  gap: 4px;                /* kleiner */
+  gap: 4px;
+  /* kleiner */
   max-width: 900px;
   line-height: 1.2;
 }
 
 /* Text einzeilig */
-.ack-label span{
+.ack-label span {
   white-space: nowrap;
 }
 
 /* Checkbox-Abstand kontrollieren */
-.ack-label input[type="checkbox"]{
-  margin: 0;               /* Standard-Margins entfernen */
-  margin-right: 4px;       /* definierter Abstand */
-  transform: translateY(1px); /* optische Feinjustierung */
+.ack-label input[type="checkbox"] {
+  margin: 0;
+  /* Standard-Margins entfernen */
+  margin-right: 4px;
+  /* definierter Abstand */
+  transform: translateY(1px);
+  /* optische Feinjustierung */
 }
 
 /* Optional: minimal kleiner machen (wirkt kompakter) */
-.ack-label input[type="checkbox"]{
+.ack-label input[type="checkbox"] {
   width: 16px;
   height: 16px;
 }
+
 /* auf sehr kleinen Displays darf es umbrechen, sonst wird es zu breit */
-@media (max-width: 420px){
-  .ack-label span{ white-space: normal; }
+@media (max-width: 420px) {
+  .ack-label span {
+    white-space: normal;
+  }
 }
 
 /* === Box-Layout für Datenschutz/Impressum === */
-.box{
+.box {
   max-width: 1000px;
   margin: 18px auto;
   background: #ffffff;
   padding: 18px 22px;
   border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
   line-height: 1.35;
 }
 
 /* === Pseudo-disabled Button (klickbar, zeigt aber "gesperrt") === */
-button.btn-disabled{
+button.btn-disabled {
   opacity: 0.45;
   cursor: not-allowed;
   transform: none !important;
 }
-button.btn-disabled:hover{
-  background: #4dad32; /* hover-effekt aus */
+
+button.btn-disabled:hover {
+  background: #4dad32;
+  /* hover-effekt aus */
   transform: none !important;
 }
+
 /* Datenschutz-Überschriften wirklich fett */
-#page-privacy h3{
+#page-privacy h3 {
   font-weight: 800 !important;
   margin: 16px 0 8px;
 }
@@ -620,19 +726,24 @@ button.btn-disabled:hover{
 
 /* Pflichtfelder */
 .required {
-    border: 2px solid #e74c3c;
-    background-color: #fff6f6;
+  border: 2px solid #e74c3c;
+  background-color: #fff6f6;
 }
 
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 99999;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  position: relative;
+  z-index: 100000;
 }
 
 .modal-content {
@@ -643,9 +754,11 @@ button.btn-disabled:hover{
   text-align: center;
   border-radius: 6px;
 }
+
 .modal-content button {
   cursor: pointer;
 }
+
 .flow-indicator {
   display: inline-block;
   margin-left: 10px;
@@ -661,4 +774,862 @@ button.btn-disabled:hover{
 .flow-indicator.active {
   background: #4dad32;
   color: #fff;
+}
+
+/* ================================
+   MODERNER KALKPRO-STYLE
+================================ */
+
+#app {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.logo {
+  margin: 24px auto 18px;
+  display: block;
+  width: 260px;
+  max-width: 70%;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: var(--shadow);
+}
+
+.page.active {
+  max-width: 1180px;
+  margin: 24px auto;
+  padding: 28px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+#page-start.active {
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0b2a4a 0%, #163f6f 100%);
+  color: white;
+}
+
+.start-slogan {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: inherit;
+}
+
+.page h2 {
+  margin: 0 0 18px;
+  font-size: 26px;
+  text-align: left;
+}
+
+.page h3 {
+  text-align: left;
+}
+
+.hint,
+.box,
+p {
+  line-height: 1.5;
+}
+
+input,
+select {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px 14px;
+  background: var(--input);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  min-height: 46px;
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  margin: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font: inherit;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.btn-komplett {
+  background: #2f6fed !important;
+  color: white !important;
+}
+
+.btn-komplett:hover {
+  background: #5a8cff !important;
+}
+
+.kalk-card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin: 22px 0;
+}
+
+.kalk-card {
+  flex: 1 1 240px;
+  max-width: 340px;
+  min-height: 118px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  background: #fafafa;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.2s ease;
+}
+
+.kalk-card:hover {
+  transform: translateY(-2px);
+  border-color: #9eb8d0;
+  background: var(--accent);
+}
+
+.kalk-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 17px;
+  color: var(--primary);
+}
+
+.kalk-card span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+#release-info,
+#timer,
+#login-info,
+#user-actions {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 6px 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.price-table {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.price-table .row,
+.row {
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.table-header {
+  background: var(--accent);
+  border-color: #bfd3e6;
+}
+
+.gesamt {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: #eef6ed;
+  border: 1px solid #c8ddc4;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  #app {
+    padding: 14px;
+  }
+
+  .page.active {
+    margin: 14px;
+    padding: 18px;
+  }
+
+  .start-slogan {
+    font-size: 22px;
+  }
+
+  .kalk-card {
+    max-width: none;
+  }
+
+  button {
+    width: 100%;
+    margin: 6px 0;
+  }
+
+  #release-info,
+  #timer,
+  #login-info,
+  #user-actions {
+    position: static;
+    margin: 6px auto;
+    max-width: 95%;
+    text-align: center;
+  }
+}
+
+/* ================================
+   KALKPRO 3-SPALTEN-LAYOUT
+================================ */
+
+.kp-hero {
+  max-width: 1320px;
+  margin: 24px auto 22px;
+  padding: 10px 26px;
+  background: linear-gradient(135deg, #a6c4e7 0%, #0b2a4a 100%);
+  color: white;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.kp-hero-left {
+  display: flex;
+  align-items: center;
+}
+
+.kp-hero .logo {
+  margin: 0;
+  width: 420px;
+  /* größer */
+  max-width: 100%;
+  border-radius: 14px;
+  padding: 6px 10px;
+  /* weniger Innenabstand */
+  box-shadow: none;
+}
+
+.kp-hero-right {
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+  font-size: 14px;
+}
+
+.kp-shell {
+  max-width: 1320px;
+  min-width: 980px;
+  margin: 0 auto 30px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 260px minmax(520px, 1fr) 300px;
+  gap: 22px;
+  align-items: start;
+}
+
+.kp-nav-card,
+.kp-content-card,
+.kp-summary-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.kp-nav-card,
+.kp-summary-card {
+  position: sticky;
+  top: 16px;
+}
+
+.kp-nav-card h2,
+.kp-summary-card h2 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  text-align: left;
+}
+
+.kp-nav-list {
+  display: grid;
+  gap: 10px;
+}
+
+.kp-nav-item {
+  width: 100%;
+  margin: 0;
+  padding: 11px 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: var(--text);
+  border: 1px solid transparent;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.kp-nav-item:hover {
+  background: var(--accent);
+  border-color: #bfd3e6;
+  color: var(--primary);
+}
+
+.kp-nav-item.active {
+  background: var(--accent);
+  border-color: #7ca2c6;
+  color: var(--primary);
+}
+
+.kp-nav-item.danger {
+  color: #b00020;
+}
+
+.kp-content-card .page.active {
+  margin: 0;
+  max-width: none;
+  box-shadow: none;
+  padding: 10px;
+}
+
+.kp-summary-card {
+  text-align: left;
+}
+
+.kp-empty-summary {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* alte feste Positionen im neuen Header deaktivieren */
+#release-info,
+#timer,
+#login-info,
+#user-actions {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  color: inherit;
+}
+
+#user-actions {
+  display: none !important;
+}
+
+/* Smartphone: Layout bleibt gleich, Seite wird horizontal scrollbar */
+@media (max-width: 980px) {
+  body {
+    overflow-x: auto;
+  }
+
+  .kp-hero {
+    min-width: 980px;
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+
+  .kp-shell {
+    padding: 0 14px;
+  }
+}
+
+/* ================================
+   KALKPRO AUSWAHL-ZUSAMMENFASSUNG
+================================ */
+
+.kp-summary-item {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.kp-summary-item span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.kp-summary-item strong {
+  font-size: 15px;
+  color: var(--primary);
+}
+
+/* ================================
+   KALKPRO DYNAMISCHE UNTERNAVIGATION
+================================ */
+
+.kp-subnav {
+  display: none;
+  gap: 8px;
+  padding-left: 14px;
+  border-left: 2px solid #dbe7f3;
+}
+
+.kp-subnav.open {
+  display: grid;
+}
+
+.kp-nav-item.sub {
+  font-size: 13px;
+  padding: 9px 10px;
+  background: #ffffff;
+}
+
+
+
+.kp-nav-item.sub-2 {
+  margin-left: 14px;
+  font-size: 12.5px;
+}
+
+.kp-nav-item.parent-active {
+  background: #eef4fb;
+  border-color: #bfd3e6;
+  color: var(--primary);
+}
+
+/* ================================
+   NAVIGATION VOR / NACH LOGIN
+================================ */
+
+body:not(.is-logged-in) .kp-nav-list {
+  display: none;
+}
+
+body.is-logged-in .kp-login-nav {
+  display: none;
+}
+
+/* ================================
+   KALKPRO MITTELKACHEL KOMPAKTER
+================================ */
+
+.kp-content-card {
+  overflow: hidden;
+}
+
+.kp-content-card .page.active {
+  padding: 8px 10px;
+}
+
+/* Überschriften kompakter */
+.kp-content-card h2 {
+  margin-bottom: 14px;
+}
+
+.kp-content-card .title {
+  font-size: 22px;
+  margin: 22px 0 10px;
+  text-align: left;
+  padding-left: 92px;
+}
+
+.kp-content-card .subtitle {
+  font-size: 17px;
+  margin: 14px 0 8px;
+}
+
+.kp-content-card .midtitle {
+  font-size: 15px;
+  margin: 10px 0 6px;
+  text-align: left;
+  padding-left: 92px;
+}
+
+/* Beschreibungstexte nicht mehr wie große Tabellenzeilen */
+.kp-content-card .row.no-price,
+.kp-content-card .beschreibung-fett-row {
+  display: block;
+  padding: 2px 10px;
+  margin: 0 auto;
+  max-width: 92%;
+  min-height: unset;
+  line-height: 1.1;
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.kp-content-card .row.no-price .col-a {
+  display: none;
+}
+
+.kp-content-card .row.no-price .col-b,
+.kp-content-card .beschreibung-fett-row .col-b {
+  display: block;
+  text-align: left;
+  padding-left: 92px;
+  /* ungefähr Bildbreite */
+  padding-right: 12px;
+  line-height: 1.35;
+}
+
+/* Tabellen kompakter */
+.kp-content-card .price-table {
+  max-width: 100%;
+  padding: 8px 0;
+  overflow: hidden;
+}
+
+.kp-content-card .row {
+  gap: 6px;
+  padding: 8px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+/* normale Preiszeilen ohne Bild */
+.kp-content-card .price-table .row,
+.kp-content-card .row {
+  grid-template-columns:
+    70px minmax(150px, 1fr) 70px 72px 90px 100px;
+}
+
+/* Preiszeilen mit Bild: deutlich schmaler */
+.kp-content-card .with-pos-images .row {
+  grid-template-columns:
+    42px 90px minmax(150px, 1fr) 58px 72px 86px 96px;
+  gap: 6px;
+}
+
+/* Bilder kleiner */
+.kp-content-card .header-img {
+  width: 90px;
+  max-height: 95px;
+  object-fit: contain;
+}
+
+.kp-content-card .pos-img {
+  max-width: 70px;
+  max-height: 58px;
+  object-fit: contain;
+}
+
+/* Beschreibung darf umbrechen */
+.kp-content-card .col-b {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Zahlen etwas kleiner und stabiler */
+.kp-content-card .col-c,
+.kp-content-card .col-d,
+.kp-content-card .col-e,
+.kp-content-card .col-f {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Mengenfeld kleiner */
+.kp-content-card input.menge-input {
+  width: 64px;
+  min-height: 38px;
+  padding: 6px;
+  font-size: 14px;
+}
+
+/* Tabellenkopf kompakter */
+.kp-content-card .table-header {
+  font-size: 12.5px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+}
+
+/* Gesamtbox kompakter */
+.kp-content-card .gesamt {
+  margin-top: 12px;
+  padding: 10px 12px;
+  font-size: 15px;
+}
+
+/* ================================
+   SEITE 40 IM NEUEN LAYOUT
+================================ */
+
+.kp-content-card #page-40 {
+  max-width: none;
+  margin: 0;
+  padding: 10px;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Seite 40 hat 6 Spalten:
+   Pos | Beschreibung | Einheit | Menge | Preis/EH | Ergebnis */
+.kp-content-card #page-40 .row.summary-row,
+.kp-content-card #page-40 .row.table-header {
+  display: grid;
+  grid-template-columns:
+    0px minmax(260px, 1fr) 62px 58px 95px 105px;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Kopfzeile */
+.kp-content-card #page-40 .table-header {
+  background: var(--accent);
+  border: 1px solid #bfd3e6;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Seite 40: finales Tabellenlayout */
+.kp-content-card #page-40 .row.summary-row,
+.kp-content-card #page-40 .row.table-header {
+  display: grid;
+  grid-template-columns:
+    6px minmax(210px, 1fr) 60px 50px 95px 105px !important;
+
+  gap: 6px;
+  align-items: center;
+}
+
+.kp-content-card #page-40 .table-header {
+  padding: 7px 6px;
+}
+
+.kp-content-card #page-40 .summary-row {
+  padding: 8px 6px;
+}
+
+/* erste Spalte unsichtbar machen, aber NICHT display:none */
+.kp-content-card #page-40 .col-a,
+.kp-content-card #page-40 .table-header>div:first-child {
+  visibility: hidden;
+  overflow: hidden;
+  padding: 0;
+  width: 0;
+}
+
+/* Beschreibung sauber links */
+.kp-content-card #page-40 .col-b {
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  padding-left: 0;
+}
+
+/* Positionszeilen */
+.kp-content-card #page-40 .summary-row {
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+/* Ausrichtung */
+.kp-content-card #page-40 .col-a,
+.kp-content-card #page-40 .col-b {
+  text-align: left;
+}
+
+.kp-content-card #page-40 .col-c {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.kp-content-card #page-40 .col-d {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.kp-content-card #page-40 .col-e,
+.kp-content-card #page-40 .col-f {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Beschreibung darf umbrechen */
+.kp-content-card #page-40 .col-b {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Gesamtpreisbox */
+.kp-content-card #page-40 .gesamt {
+  max-width: none;
+  margin: 14px 0 6px;
+  padding: 10px 12px;
+}
+
+/* Seite 40 Kopfzeile feinjustieren */
+.kp-content-card #page-40 .table-header {
+  padding-left: 6px;
+  padding-right: 10px;
+}
+
+/* Positionszeilen */
+.kp-content-card #page-40 .summary-row {
+  padding-left: 6px;
+  padding-right: 10px;
+}
+
+/* Beschreibung */
+.kp-content-card #page-40 .col-b {
+  padding-right: 10px;
+}
+
+/* Zahlen-Spalten */
+.kp-content-card #page-40 .col-c,
+.kp-content-card #page-40 .col-d,
+.kp-content-card #page-40 .col-e,
+.kp-content-card #page-40 .col-f {
+  padding-left: 4px;
+}
+
+/* ================================
+   DRUCKANSICHT: NUR HEADER + SEITE 40
+================================ */
+
+@media print {
+
+  body {
+    background: white !important;
+  }
+
+  .kp-nav-card,
+  .kp-summary-card,
+  #timer,
+  #login-info,
+  #release-info,
+  #user-actions,
+  button {
+    display: none !important;
+  }
+
+  #app {
+    display: block !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .kp-hero {
+    display: block !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 0 18px 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .kp-hero-left {
+    display: block !important;
+  }
+
+  .kp-hero .logo {
+    width: 260px !important;
+    max-width: 260px !important;
+    padding: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  .kp-shell {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .kp-content-card {
+    display: block !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  .page {
+    display: none !important;
+  }
+
+  #page-40 {
+    display: block !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ================================
+   GROSSE MENÜBUTTONS (DC / AC / WR)
+================================ */
+
+.kp-content-card .menu-button,
+.kp-content-card .submenu-button {
+  display: block;
+  width: 96%;
+  max-width: none;
+  margin: 10px auto;
+  padding: 18px 20px;
+
+  background: #f8fafc;
+  border: 1px solid #d7dfe8;
+  border-radius: 14px;
+
+  color: var(--primary);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+
+  transition: 0.2s ease;
+}
+
+.kp-content-card .menu-button:hover,
+.kp-content-card .submenu-button:hover {
+  background: var(--accent);
+  border-color: #9eb8d0;
+  transform: translateY(-2px);
+}
+
+/* kleinere Unterpunkte */
+.kp-content-card .submenu-button {
+  font-size: 16px;
+  padding: 15px 18px;
+}
+
+/* Rechte Auswahlkachel nur nach Login anzeigen */
+body:not(.is-logged-in) #kp-selection-summary {
+  display: none;
+}
+
+.recaptcha-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 14px 0;
 }
