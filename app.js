@@ -1425,11 +1425,6 @@ function submitPage5() {
 
   const errorDiv = document.getElementById("page5-error");
 
-  if (!data["copy-email"]) {
-    showHinweis("Bitte E-Mail-Adresse für die Kopie der Anfrage eingeben.");
-    return false;
-  }
-
   if (missing.length > 0) {
     errorDiv.innerText = "Bitte folgende Felder ausfüllen:\n" + missing.join(", ");
     return;
